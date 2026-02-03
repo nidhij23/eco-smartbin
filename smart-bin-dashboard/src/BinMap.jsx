@@ -62,50 +62,25 @@ export default function BinMap() {
     const [userLoc, setUserLoc] = useState([28.6139, 77.2090]); // Default to Delhi coordinates
 
     useEffect(() => {
-        // Faking a backend response for testing
-        const mockBins = [
-            {
-                id: 1,
-                name: "Central Park Bin",
-                lat: 28.6139,
-                lng: 77.2090,
-                type: 'STATIC',
-                fillLevel: 85
-            },
-            {
-                id: 2,
-                name: "Mobile Collection Truck",
-                lat: 28.6200,
-                lng: 77.2150,
-                type: 'MOBILE',
-                fillLevel: 30
-            }
-        ];
+        // 1. Get User Location
+        navigator.geolocation.getCurrentPosition(
+            (pos) => setUserLoc([pos.coords.latitude, pos.coords.longitude]),
+            (err) => console.log("Location denied, using default.")
+        );
 
-        setBins(mockBins);
-    }, []); // Runs once on load
+        // 2. Fetch Bins from Java Backend
+        const fetchBins = async () => {
+            try {
+                const res = await fetch(`http://localhost:8080/api/bins/nearby?lat=${userLoc[0]}&lng=${userLoc[1]}`);
+                const data = await res.json();
+                setBins(data);
+            } catch (e) { console.error("Java API not running yet?"); }
+        };
 
-
-    // useEffect(() => {
-    //     // 1. Get User Location
-    //     navigator.geolocation.getCurrentPosition(
-    //         (pos) => setUserLoc([pos.coords.latitude, pos.coords.longitude]),
-    //         (err) => console.log("Location denied, using default.")
-    //     );
-    //
-    //     // 2. Fetch Bins from Java Backend
-    //     const fetchBins = async () => {
-    //         try {
-    //             const res = await fetch(`http://localhost:8080/api/bins/nearby?lat=${userLoc[0]}&lng=${userLoc[1]}`);
-    //             const data = await res.json();
-    //             setBins(data);
-    //         } catch (e) { console.error("Java API not running yet?"); }
-    //     };
-    //
-    //     fetchBins();
-    //     const timer = setInterval(fetchBins, 5000); // Update every 5s for mobile bins
-    //     return () => clearInterval(timer);
-    // }, [userLoc]);
+        fetchBins();
+        const timer = setInterval(fetchBins, 5000); // Update every 5s for mobile bins
+        return () => clearInterval(timer);
+    }, [userLoc]);
 
     return (
         <div className="h-full w-full">
