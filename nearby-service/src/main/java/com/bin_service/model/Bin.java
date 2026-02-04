@@ -1,4 +1,4 @@
-package com.nearby_service.model;
+package com.bin_service.model;
 
 public record Bin(
         Long id,

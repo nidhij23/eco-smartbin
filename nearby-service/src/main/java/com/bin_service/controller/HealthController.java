@@ -1,4 +1,4 @@
-package com.nearby_service.controller;
+package com.bin_service.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,7 @@ public class HealthController {
     public Map<String, Object> checkHealth() {
         return Map.of(
                 "status", "UP",
-                "service", "nearby-service",
+                "service", "bin-service",
                 "timestamp", LocalDateTime.now().toString()
         );
     }

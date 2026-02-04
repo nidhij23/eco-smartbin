@@ -1,6 +1,6 @@
-package com.nearby_service.services;
+package com.bin_service.services;
 
-import com.nearby_service.model.Bin;
+import com.bin_service.model.Bin;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.nearby_service;
+package com.bin_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

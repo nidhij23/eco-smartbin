@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: nearby-service
+
+  datasource:
+    # Note the hierarchy: spring -> datasource -> url
+    url: jdbc:postgresql://localhost:5432/smartbin_service
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    # Hibernate settings
+#    database-platform: org.hibernate.spatial.dialect.postgis.PostgisPGDialect
+    hibernate:
+      ddl-auto: validate # Flyway handles the creation, Hibernate just validates
+    show-sql: true # Helpful for your LLD debugging
+
+  flyway:
+    enabled: true
+    # This forces the app to crash if the migration folder is missing
+    locations: classpath:db/migration
+    fail-on-missing-locations: true
