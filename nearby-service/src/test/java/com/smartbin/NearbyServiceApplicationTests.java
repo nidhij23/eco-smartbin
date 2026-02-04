@@ -1,4 +1,4 @@
-package com.bin_service;
+package com.smartbin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
