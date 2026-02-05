@@ -34,3 +34,7 @@ build/
 .idea/
 .DS_Store
 
+
+### Python ##
+/testing/venv
+

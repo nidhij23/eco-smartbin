@@ -4,7 +4,7 @@ public interface SpatialStrategy {
     /**
      * Converts coordinates into a searchable string index (Geohash, H3, etc.)
      */
-    String generateIndex(double lat, double lon);
+    String generateGeoIndex(double lat, double lon);
 
     /**
      * Calculates the "as-the-crow-flies" distance between two points.
